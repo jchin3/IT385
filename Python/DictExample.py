@@ -8,3 +8,12 @@ print(eng2esp)
 # View elements
 print(eng2esp["one"])
 print(eng2esp['three'])
+
+# add and remove items from dictionary
+eng2esp.update({"four":"cuatro", "five":"cinco"})
+eng2esp.pop("two")
+print(eng2esp)
+
+# show all keys and values
+print(eng2esp.keys())
+print(eng2esp.values())
