@@ -19,6 +19,13 @@ def power(num, power=2):
     result = result * num
   print(result)
 
+# Variable number of parameters
+def multiAdd(*args):
+  result = 0
+  for x in args: 
+    result += x
+  return result
+
 # Call functions
 # func1()
 # print(func1())
@@ -29,6 +36,12 @@ def power(num, power=2):
   
 # print(cube(5))
 
-power(6,6)
-power(6,2)
-power(6)
+# power(6,6)
+# power(6,2)
+# power(6)
+
+print(multiAdd(5, 6, 9, 15, 9))
+print(multiAdd())
+print(multiAdd(234,242,612,156,223,745,742,743,735,732,725,722))
+
+
