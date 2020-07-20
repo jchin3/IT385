@@ -8,3 +8,5 @@ def func1():
 
 # Call functions
 func1()
+print(func1())
+print(func1)
