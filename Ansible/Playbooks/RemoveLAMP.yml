@@ -1,0 +1,38 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Remove user (egoad/Rubberduck!)
+    user:
+      name: egoad
+      state: absent
+    become: yes
+
+- hosts: db
+  tasks:
+  - name: Uninstall MariaDB
+    become: yes
+    yum:
+      name: 'mariadb-server'
+      state: absent
+
+- hosts: web
+  tasks: 
+  - name: Uninstall Apache (httpd)
+    yum: name='httpd' state=absent
+    become: yes
+  - name: Configure firewall
+    firewalld:
+      service: http
+      state: disabled
+      permanent: true
+    become: yes
+    notify:
+    - restart-firewall
+
+  handlers:
+    - name: restart-firewall
+      service:
+        name: firewalld
+        state: restarted
+      become: yes
