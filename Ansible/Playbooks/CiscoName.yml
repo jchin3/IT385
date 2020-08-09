@@ -4,5 +4,5 @@
   connection: local
   tasks:
   - name: Update hostname
-    ios_configure:
+    ios_config:
       line: hostname Michael
