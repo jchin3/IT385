@@ -3,17 +3,49 @@
   gather_facts: false
   connection: local
   tasks:
-  - name: Configure static route
-    ios_static_route:
-      prefix: 0.0.0.0 
-      mask: 0.0.0.0
-      next_hop: s0/0/0
+  - name: Configure R1
+    ios_command:
+       commands:
+         - enable
+         - configure terminal
+         - ip route 0.0.0.0 0.0.0.0 s0/0/0
+         - hostname R1
+         - no ip domain-lookup
+         - service password-enryption
+         - security passwords min-length 10
+         - login block-for 180 attempts 4 within 120
+         - enable secret Ciscoenpa55
+         - banner motd $Warning: Unauthorized Access is Prohibited!$
+         - line con 0
+         - exec-timeout 5 0
+         - password Ciscoconpa55
+         - login
+         - line vty 0 4
+         - exec-timeout 5 0
+         - login local
+         - exit 
+         - write
+  - name: Configure R2
+    ios_command:
+       commands:
+         - enable
+         - configure terminal
+         - ip route 0.0.0.0 0.0.0.0 s0/0/0
+         - hostname R2
+         - no ip domain-lookup
+         - service password-enryption
+         - security passwords min-length 10
+         - login block-for 180 attempts 4 within 120
+         - enable secret Ciscoenpa55
+         - banner motd $Warning: Unauthorized Access is Prohibited!$
+         - line con 0
+         - exec-timeout 5 0
+         - password Ciscoconpa55
+         - login
+         - line vty 0 4
+         - exec-timeout 5 0
+         - login local
+         - exit 
+         - write
 
-  - name: configure hostname
-    ios_config:
-      lines: hostname {{ inventory_hostname }}
- 
-  - name: configure domain
-    ios_system:
-      lookup-enabled: no
   
